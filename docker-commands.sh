@@ -44,3 +44,11 @@ touch $targd/update-container.sh
         echo 'docker compose up -d'
 
 } >> $targd/update-container.sh
+
+## see conainer processes
+rm -f $targd/top.sh
+touch $targd/top.sh
+ { echo '#!/bin/sh'
+   echo "cid=\$(docker ps | grep -i ${name} | awk '{print \$1}')"
+   echo 'docker exec -it $cid top'
+ } >> $targd/top.sh
